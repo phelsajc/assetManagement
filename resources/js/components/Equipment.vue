@@ -9,7 +9,7 @@
         </div>
         </div>
         <div class="panel-footer" v-if="results.length">
-        <ul class="list-group">
+        <ul class="list-group list-group-result">
             <li class="list-group-item" v-for="result in results" @click="getEquipment(result)">
                 {{ result.bizboxid }} ({{ result.desc }})
             </li>
@@ -56,6 +56,7 @@
                 this.form.val = id.desc;
                 this.bbid = id.bizboxid;
                 this.bbdesc = id.desc;
+                this.$refs.regRef.form.testval = id.desc
                 this.$emit( 'handle-form-data', this.results2 );
                 
             },
@@ -69,16 +70,13 @@
                 //this.isRegistered = true;
                 this.results = [] ;
             }
-        },     
-        created() {
-            this.$parent.$on('update', this.setValue);
-        },
+        },    
         props: ['products'],
     }
    </script>
 
 <style>
-.list-group {
+.list-group-result {
     position: absolute;
     display: block;
     z-index: 1051;

@@ -29,9 +29,9 @@
             role="menu"
             data-accordion="false"
           >
-            <li class="nav-item" :class="{'menu-open':this.$route.name=='company_add'||this.$route.name=='product_add'||this.$route.name=='rproduct_add'||this.$route.name=='rproduct_list'||this.$route.name=='company_list'||this.$route.name=='product_list'}">
+          <li class="nav-item" :class="{'menu-open':this.$route.name=='company_add'||this.$route.name=='product_add'||this.$route.name=='rproduct_add'||this.$route.name=='rproduct_list'||this.$route.name=='company_list'||this.$route.name=='product_list'}">        
             <a href="javascript:void(0);" class="nav-link" :class="{'active':this.$route.name=='rproduct_list'||this.$route.name=='company_list'||this.$route.name=='product_list'}">
-              <i class="nav-icon fas fa-folder-plus"></i>
+            <i class="nav-icon fas fa-folder-plus"></i>
               <p>
                 Master Files
               </p>

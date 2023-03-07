@@ -68,7 +68,8 @@
                         icon: 'success',
                         title: 'Signed in successfully1'
                     })
-                    this.$router.push({ name: 'product_list' })
+                    //this.$router.push({ name: 'product_list' })
+                    location  = '/product_list'
                 })
                 .catch(error => this.errors = error.response.data.errors)
                 .catch(

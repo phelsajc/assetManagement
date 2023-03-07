@@ -21,7 +21,7 @@
       },
       
     mounted() {
-      $.AdminLTE.init();
+      //$.AdminLTE.init();
     },
     }
 </script>

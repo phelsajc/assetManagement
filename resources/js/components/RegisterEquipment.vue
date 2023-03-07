@@ -19,6 +19,10 @@
                   <input type="text" class="form-control" readonly placeholder="Enter Desctiption" v-model="form.desc">
                 </div>
                 <div class="form-group">
+                  <label for="exampleInputEmail1">Test</label>
+                  <input type="text" class="form-control" readonly placeholder="Enter Desctiption" v-model="form.testval">
+                </div>
+                <div class="form-group">
                   <label for="exampleInputPassword1">Life</label>
                   <input type="text" class="form-control" placeholder="Enter Life" v-model="form.life">
                 </div>
@@ -57,15 +61,7 @@
                   desc: self.description,             
                   life: '',             
                   ispreventive: false,
-              },
-              results: [],
-              results2: {
-                  pk_iwitems: '',
-                  itemdesc: '',
-                  genericname: '',
-                  dc_price: 0,
-                  sc_price: 0,
-                  reg_price: 0,         
+                  testval: '',
               },
           }
       },
@@ -91,12 +87,12 @@
           },
           getEquipment(id) {
               this.getValue = id            
-              this.results2.pk_iwitems = id.pk_iwitems;
+              /* this.results2.pk_iwitems = id.pk_iwitems;
               this.results2.itemdesc = id.itemdesc;
               this.results2.genericname = id.genericname;
               this.results2.dc_price = id.discounted_price;
               this.results2.sc_price = id.sc_price;
-              this.results2.reg_price = id.price;
+              this.results2.reg_price = id.price; */
               this.form.val = id.desc;
               this.results = []
               this.$emit( 'handle-form-data', this.results2 );
@@ -109,7 +105,7 @@
           },addProduct(){            
             axios.post('/api/products-add',this.form)
               .then(res => {
-              this.$router.push({name: 'product_list'});
+              //this.$router.push({name: 'product_list'});
               Toast.fire({
                   icon: 'success',
                   title: 'Saved successfully'

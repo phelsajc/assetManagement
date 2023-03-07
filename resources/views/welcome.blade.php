@@ -36,19 +36,20 @@
       @push('scripts')
         {{-- <script src="{{ asset('backend2/dist/js/adminlte.min.js') }}"></script> --}}
         
-        <script src="{{ mix('js/adminlte.min.js') }}"></script>
+       {{--  <script src="{{ mix('js/adminlte.min.js') }}"></script> --}}
       @endpush
 </div>
 
 
 <!-- jQuery -->
 <script src="{{ asset('backend2/plugins/jquery/jquery.min.js') }}"></script>
+<script src="{{ asset('backend2/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+<script src="{{ asset('backend2/dist/js/adminlte.min.js') }}"></script>
+<!-- Bootstrap 4 -->
+<script src="{{ asset('js/app.js')}}"></script>
 {{-- <script src="{{ asset('backend2/dist/js/adminlte.min.js') }}"></script> --}}
 <!-- jQuery UI 1.11.4 -->
 <script src="{{ asset('backend2/plugins/jquery-ui/jquery-ui.min.js') }}"></script>
-<!-- Bootstrap 4 -->
-<script src="{{ asset('js/app.js')}}"></script>
-<script src="{{ asset('backend2/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 <!-- ChartJS -->
 <script src="{{ asset('backend2/plugins/chart.js/Chart.min.js') }}"></script>
 <!-- Sparkline -->
@@ -74,6 +75,8 @@
 {{-- <script src="{{ asset('backend2/dist/js/pages/dashboard.js') }}"></script> --}}
 <script type="text/javascript">
   $( document ).ready(function() {
+    //window.location.reload();
+    //location = location
     let token = localStorage.getItem('token');
     if(token) {
         $("#sidebar").css("display","");

@@ -87,7 +87,7 @@
           <!-- /.row -->
         </div>
         
-        <equipmentModal v-if="showModal" @close="showModal = false">
+        <equipmentModal v-if="showModal" @close="showModal = false" :all-employee="allEmployee">
         </equipmentModal>
         <!-- /.container-fluid -->
       </section>
@@ -100,12 +100,13 @@
 
   export default {
 created() {
+  
           if(!User.loggedIn()){
               this.$router.push({name: '/'})
           }
-
+          this.allEmployee();
           /* 
-          this.stockInventory()this.allEmployee();
+          this.stockInventory()
           this.me(); */
       },
       data(){

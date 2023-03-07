@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Products extends Model
 {
-    protected $table = "products";
+    protected $table = "equipments";
 
     protected $primaryKey = "id";
 
@@ -14,12 +14,13 @@ class Products extends Model
 
     protected $fillable = [
         'id',
-        'product',
         'description',
-        'quantity',
-        'uom',
-        'dop',
-        'code',
+        'life',
+        'bizboxID',
+        'status',
+        'isforpreventive',
+        'created_by',
+        'created_dt',
         'updated_by',
         'updated_dt',
     ];

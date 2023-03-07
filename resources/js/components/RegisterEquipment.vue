@@ -1,0 +1,126 @@
+<template>
+    
+  <div class="row">
+        <!-- left column -->
+        <div class="col-md-12">
+          <!-- general form elements :value="bizboxid" -->
+          <div class="card card-primary">
+            <div class="card-header">
+              <h3 class="card-title">&nbsp;</h3>
+            </div>
+            <form class="user" @submit.prevent="addProduct" enctype="multipart/form-data">
+              <div class="card-body">
+                <div class="form-group">
+                  <label for="exampleInputEmail1">Bizbox ID </label>
+                  <input type="text" class="form-control" readonly  placeholder="Enter Desctiption" v-model="form.bizboxid">
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputEmail1">Description</label>
+                  <input type="text" class="form-control" readonly placeholder="Enter Desctiption" v-model="form.desc">
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputPassword1">Life</label>
+                  <input type="text" class="form-control" placeholder="Enter Life" v-model="form.life">
+                </div>
+                <div class="form-check">
+                  <input type="checkbox" class="form-check-input" v-model="form.ispreventive">
+                  <label class="form-check-label" for="exampleCheck1">Is preventive?</label>
+                </div>
+              </div>
+              <div class="card-footer">
+                <button type="submit" class="btn btn-primary">Submit</button>
+              </div>
+            </form>
+          </div>
+
+        </div>
+      </div>
+ </template>
+
+ <script>
+ 
+  export default{ 
+      props: {
+          bizboxid: {
+              type: String,
+              default: ''
+          },
+          description: {
+              type: String,
+              default: ''
+          }
+      },
+      data(){
+          return {
+              form: {
+                  bizboxid: self.bizboxid,                    
+                  desc: self.description,             
+                  life: '',             
+                  ispreventive: false,
+              },
+              results: [],
+              results2: {
+                  pk_iwitems: '',
+                  itemdesc: '',
+                  genericname: '',
+                  dc_price: 0,
+                  sc_price: 0,
+                  reg_price: 0,         
+              },
+          }
+      },
+      watch: {
+        bizboxid(v) {
+          this.form.bizboxid = v
+        },
+        description(v) {
+          this.form.desc = v
+        }
+      },
+      computed: {
+          //...mapState(['bizboxid'])
+      },
+      methods: {
+          autoComplete(){
+              this.results = [];                
+              axios.post('/api/find_item',this.form)
+              .then(res => {
+                  this.results = res.data  
+              })
+              .catch(error => this.errors = error.response.data.errors)        
+          },
+          getEquipment(id) {
+              this.getValue = id            
+              this.results2.pk_iwitems = id.pk_iwitems;
+              this.results2.itemdesc = id.itemdesc;
+              this.results2.genericname = id.genericname;
+              this.results2.dc_price = id.discounted_price;
+              this.results2.sc_price = id.sc_price;
+              this.results2.reg_price = id.price;
+              this.form.val = id.desc;
+              this.results = []
+              this.$emit( 'handle-form-data', this.results2 );
+          },
+          setValue(value) {
+          this.form.val = value
+          },
+          clearForm() {
+              this.form.val = ''
+          },addProduct(){            
+            axios.post('/api/products-add',this.form)
+              .then(res => {
+              this.$router.push({name: 'product_list'});
+              Toast.fire({
+                  icon: 'success',
+                  title: 'Saved successfully'
+              });
+            })
+            .catch(error => this.errors = error.response.data.errors)
+          }   
+      },     
+      created() {
+          console.log(this.bizboxid)
+          this.$parent.$on('update', this.setValue);
+      },
+  }
+ </script>

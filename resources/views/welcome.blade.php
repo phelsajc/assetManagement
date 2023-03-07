@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>St.Marina | Dashboard</title>
+  <title>Asset Management | Dashboard</title>
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -33,12 +33,17 @@
 <div id="app">
   
       <router-view></router-view>
-
+      @push('scripts')
+        {{-- <script src="{{ asset('backend2/dist/js/adminlte.min.js') }}"></script> --}}
+        
+        <script src="{{ mix('js/adminlte.min.js') }}"></script>
+      @endpush
 </div>
 
 
 <!-- jQuery -->
 <script src="{{ asset('backend2/plugins/jquery/jquery.min.js') }}"></script>
+{{-- <script src="{{ asset('backend2/dist/js/adminlte.min.js') }}"></script> --}}
 <!-- jQuery UI 1.11.4 -->
 <script src="{{ asset('backend2/plugins/jquery-ui/jquery-ui.min.js') }}"></script>
 <!-- Bootstrap 4 -->
@@ -63,7 +68,6 @@
 <!-- overlayScrollbars -->
 <script src="{{ asset('backend2/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js') }}"></script>
 <!-- AdminLTE App -->
-<script src="{{ asset('backend2/dist/js/adminlte.js') }}"></script>
 <!-- AdminLTE for demo purposes -->
 {{-- <script src="{{ asset('backend2/dist/js/demo.js') }}"></script> --}}
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->

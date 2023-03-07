@@ -7,15 +7,12 @@
         <div class="container-fluid">
           <div class="row mb-2">
             <div class="col-sm-6">
-              <h1>Product Lists</h1>
+              <h1>Equipment Lists</h1>
             </div>
           </div>
         </div>
         <!-- /.container-fluid -->
       </section>
-
-      <!-- Main content -->
-
       <section class="content">
         <div class="container-fluid">
           <div class="row">
@@ -23,11 +20,8 @@
               <div class="card">
                 <div class="card-header">
                   <h3 class="card-title">&nbsp;</h3>
-                  <router-link to="/product_add/0" class="btn btn-primary"
-                    >Add</router-link
-                  >
+                  <button id="show-modal" @click="showModal = true" class="btn btn-info">Find</button>
                 </div>
-
                 <div class="card-body">
                   <div class="spin_center" :class="{'d-none': isHidden }">
                     <div class="overlay">
@@ -52,7 +46,7 @@
                         <div class="col-6 float-left">
                           <div class="d-flex w-100 justify-content-between">
                             <h5 class="mb-1">
-                              <strong>{{e.name}} </strong>
+                              <strong>{{e.desc}} </strong>
                             </h5>
                           </div>
                           <span class="badge badge-secondary"> {{e.desc}}</span>
@@ -92,6 +86,9 @@
           </div>
           <!-- /.row -->
         </div>
+        
+        <equipmentModal v-if="showModal" @close="showModal = false">
+        </equipmentModal>
         <!-- /.container-fluid -->
       </section>
     </div>
@@ -107,14 +104,14 @@ created() {
               this.$router.push({name: '/'})
           }
 
-          //Notification.success()
-          this.allEmployee();
-          this.me();
-          this.stockInventory()
+          /* 
+          this.stockInventory()this.allEmployee();
+          this.me(); */
       },
       data(){
 
           return {
+                showModal: false,
               hasError: false,
               isHidden: true,
               form: {
@@ -133,7 +130,7 @@ created() {
       computed:{
           filtersearch(){
               return this.employees.filter(e => {
-                return e.name.match(this.searchTerm)
+                return e.desc.match(this.searchTerm)
               })
           },
 
@@ -154,7 +151,7 @@ created() {
           stockInventory(){
             this.isHidden =  false
               //axios.get('/api/employee')
-              axios.get('/api/stockInventory')
+              axios.get('/api/products')
               .then(({data}) => (
                 console.log(data)
              ))

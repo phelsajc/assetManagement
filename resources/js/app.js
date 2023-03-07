@@ -1,8 +1,12 @@
 require('./bootstrap');
 
+//require('./adminlte.min.js');
+
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 Vue.use(VueRouter)
+
+//import './adminlte.min.js';
 
 //Router Imported
 import {routes} from './routes'
@@ -27,15 +31,16 @@ window.Swal = Swal;
 
 import VuePdfApp from "vue-pdf-app";
 window.VuePdfApp = VuePdfApp;
-Vue.component('Autocomplete', require('./components/Autocomplete.vue').default);
-Vue.component('diagnostic', require('./components/AutocompleteD.vue').default);
+Vue.component('equipmentModal', require('./components/modals/equipment.vue').default);
+Vue.component('equipmentComponent', require('./components/Equipment.vue').default);
+Vue.component('RegisterEquipment', require('./components/RegisterEquipment.vue').default);
 Vue.component('user-info', require('./components/User.vue').default);
-Vue.component('pxmodal', require('./components/Prescription.vue').default);
 Vue.component('navComponent', require('./components/template/nav.vue').default);
 Vue.component('sidemenuComponent', require('./components/template/sidemenu.vue').default);
 Vue.component('footerComponent', require('./components/template/footer.vue').default);
 Vue.component('loaderComponent', require('./components/template/loader.vue').default);
 Vue.component('products', require('./components/Products.vue').default);
+
 const Toast = Swal.mixin({
     toast: true,
     position: 'top-end',

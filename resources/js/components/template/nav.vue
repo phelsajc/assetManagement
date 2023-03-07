@@ -19,5 +19,9 @@
       data() {
         return {}
       },
+      
+    mounted() {
+      $.AdminLTE.init();
+    },
     }
 </script>

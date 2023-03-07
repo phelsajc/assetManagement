@@ -99,6 +99,11 @@ Route::match(['get','post'],'collection-delete/{id}','CollectionController@delet
 Route::match(['get','post'],'collection-report','CollectionController@reports');
 
 
+#Equipment
+Route::match(['get','post'],'find_item','EquipmentController@find_item');
+
+
+
 
 
 

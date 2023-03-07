@@ -3,11 +3,10 @@
         <div class="login-box">
   <div class="card card-outline card-primary">
     <div class="card-header text-center">
-      <a href="javascript:void(0);" class="h1"><b>St.Marina</b></a>
+      <a href="javascript:void(0);" class="h1"><b>Asset Management</b></a>
     </div>
     <div class="card-body">
       <p class="login-box-msg">Sign in to start your session</p>
-
         <form class="user" @submit.prevent="login">
             <div class="input-group mb-3">
                 <input type="text" class="form-control" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Enter Email Address" v-model="form.username">
@@ -33,27 +32,23 @@
             <hr>
         </form>                
     </div>
-    <!-- /.card-body -->
   </div>
-  <!-- /.card -->
 </div>
     </div>
 </template>
 
 <style lang="scss" scoped>
     @import "../../../../public/backend2/dist/css/adminlte.min.css";
-    /* {{ asset('backend2/dist/css/adminlte.min.css') }} */
-</style>    
+</style>  
 
 <script type="text/javascript">
 
     export default {
         created(){
-            if(!User.loggedIn()){
+            /* if(!User.loggedIn()){
                 this.$router.push({name: '/'})
-            }
+            } */
         },
-
         data() {
             return {
                 form: {
@@ -73,10 +68,7 @@
                         icon: 'success',
                         title: 'Signed in successfully1'
                     })
-                    //this.$router.push({name: 'home'})
-                    
-                    this.$router.push({ name: 'transaction_list' })
-                    //location = "/all_employee"
+                    this.$router.push({ name: 'product_list' })
                 })
                 .catch(error => this.errors = error.response.data.errors)
                 .catch(
@@ -84,8 +76,6 @@
                         icon: 'warning',
                         title: 'User Not Found!'
                     }),
-
-                    console.log(this.errors)
                 )
             }
         },

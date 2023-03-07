@@ -18,26 +18,26 @@ class ProductController extends Controller
         $start = $request->start?$request->start:0;
         $val = $request->searchTerm2;
         if($val!=''||$start>0){   
-            $data =  DB::connection('pgsql')->select("select * from products where product ilike '%".$val."%' LIMIT $length offset $start");
-            $count =  DB::connection('pgsql')->select("select * from products where product ilike '%".$val."%' ");
+            $data =  DB::connection('pgsql')->select("select * from equipments where description ilike '%".$val."%' LIMIT $length offset $start");
+            $count =  DB::connection('pgsql')->select("select * from equipments where description ilike '%".$val."%' ");
         }else{
-            $data =  DB::connection('pgsql')->select("select * from products LIMIT $length");
-            $count =  DB::connection('pgsql')->select("select * from products");
+            $data =  DB::connection('pgsql')->select("select * from equipments LIMIT $length");
+            $count =  DB::connection('pgsql')->select("select * from equipments");
         }
         
-        $count_all_record =  DB::connection('pgsql')->select("select count(*) as count from products");
+        $count_all_record =  DB::connection('pgsql')->select("select count(*) as count from equipments");
 
         $data_array = array();
 
         foreach ($data as $key => $value) {
             $arr = array();
             $arr['id'] =  $value->id;
-            $arr['name'] =  $value->product;
+            $arr['name'] =  $value->description;
             $arr['desc'] =  $value->description;
-            $arr['qty'] =  $value->quantity;
-            $arr['uom'] =  $value->uom;
-            $arr['dop'] =  $value->dop;  
-            $arr['price'] =  $value->price;  
+            $arr['qty'] =  $value->description;
+            $arr['uom'] =  $value->description;
+            $arr['dop'] =  $value->description;  
+            $arr['price'] =  $value->description;  
             $data_array[] = $arr;
         }
         $page = sizeof($count)/$length;
@@ -56,15 +56,13 @@ class ProductController extends Controller
     {
         date_default_timezone_set('Asia/Manila');
         $p = new Products;
-        $p->product = $request->name;
         $p->description = $request->desc;
-        //$p->quantity = $request->qty;
-        $p->uom = $request->uom;
-        //$p->dop = $request->dop;
-        $p->code = $request->code;
-        $p->price = $request->price;
-        $p->created_dt = date("Y-m-d H:i");
-        $p->created_by = $request->userid;   
+        $p->life = $request->life;
+        $p->bizboxID = $request->bizboxid;
+        $p->status = $request->status;
+        $p->isforpreventive = $request->ispreventive;  
+        $p->created_by = $request->userid;
+        $p->created_dt = date("Y-m-d H:i"); 
         $p->save();
         return true;
     }

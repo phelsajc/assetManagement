@@ -12,7 +12,7 @@
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item"><a href="#">Home</a></li>
-                    <li class="breadcrumb-item active">Products</li>
+                    <li class="breadcrumb-item active">Equipment</li>
                     </ol>
                 </div>
                 </div>
@@ -27,7 +27,7 @@
                     
                     <div class="card card-primary">
                     <div class="card-header">
-                        <h3 class="card-title">Add Product</h3>
+                        <h3 class="card-title">Edit Equipment</h3>
                         <div class="card-tools">
                         <button type="button" class="btn btn-tool" data-card-widget="collapse">
                             <i class="fas fa-minus"></i>
@@ -41,8 +41,8 @@
                             <div class="row">
                                 <div class="col-sm-6">
                                 <div class="form-group">
-                                    <label>Product</label>
-                                    <input type="text" class="form-control" id="" placeholder="Enter Product name" v-model="form.name">
+                                    <label>BizboxID</label>
+                                    <input type="text" class="form-control" id="" placeholder="Enter Product name" v-model="form.bbid" readonly>
                                     <small class="text-danger" v-if="errors.name">{{ errors.name[0] }}</small>
                                 </div>
                                 </div>
@@ -54,57 +54,21 @@
                                 </div>
                                 </div>
                             </div>
+                            
                             <div class="row">
-                                <!-- <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <label>Quantity</label>
-                                        <input type="text" class="form-control" id="" placeholder="Enter Product Quantity" v-model="form.qty">
-                                        <small class="text-danger" v-if="errors.qty">{{ errors.qty[0] }}</small>
-                                    </div>
-                                </div> -->
-                                <!-- <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <label>UOM</label>
-                                        <select  class="form-control" v-model="form.uom">
-                                            <option value="PCS">PCS</option>
-                                            <option value="KG">KG</option>
-                                            <option value="LT">LT</option>
-                                        </select>
-                                        <small class="text-danger" v-if="errors.uom">{{ errors.uom[0] }}</small>
-                                    </div>
-                                </div> -->
-                            </div>
-                            <div class="row">
-                                <!-- <div class="col-sm-4">
-                                    <div class="form-group">
-                                        <label>Date Purchase</label>
-                                        <datepicker name="dop" v-model="form.dop" :bootstrap-styling=true></datepicker>
-                                        <small class="text-danger" v-if="errors.dop">{{ errors.dop[0] }}</small>
-                                    </div>
-                                </div> -->
                                 <div class="col-sm-4">
                                     <div class="form-group">
-                                        <label>UOM</label>
-                                        <select  class="form-control" v-model="form.uom">
-                                            <option value="PFS">PFS</option>
-                                            <option value="BXS">BXS</option>
-                                            <option value="BOT">BOT</option>
-                                        </select>
-                                        <small class="text-danger" v-if="errors.uom">{{ errors.uom[0] }}</small>
+                                        <label>Life </label>
+                                        <input type="number" class="form-control" id="" placeholder="Enter Product Life" v-model="form.life">
+                                        <small class="text-danger" v-if="errors.life">{{ errors.life[0] }}</small>
                                     </div>
                                 </div>
                                 <div class="col-sm-4">
                                     <div class="form-group">
-                                        <label>Price </label>
-                                        <input type="number" class="form-control" id="" placeholder="Enter Product Price" v-model="form.price">
-                                        <small class="text-danger" v-if="errors.price">{{ errors.price[0] }}</small>
-                                    </div>
-                                </div>
-                                <div class="col-sm-4">
-                                    <div class="form-group">
-                                        <label>Code </label>
-                                        <input type="text" class="form-control" id="" placeholder="Enter Product Code" v-model="form.code">
-                                        <small class="text-danger" v-if="errors.code">{{ errors.code[0] }}</small>
+                                        <div class="form-check">
+                                        <input type="checkbox" class="form-check-input" :checked="form.isPreventive" v-model="form.isPreventive">
+                                        <label class="form-check-label" for="exampleCheck1">Is preventive?</label>
+                                        </div>
                                     </div>
                                 </div>
                             </div>                     
@@ -148,13 +112,11 @@ import Datepicker from 'vuejs-datepicker'
         data() {
             return {
                 form: {
-                    name: '',
+                    bbid: '',
                     desc: '',
-                    //qty: '',
-                    uom: '',
-                    //dop:'',
-                    code:'',
-                    price:'',
+                    life: '',
+                    isPreventive: false,
+                    id:0,
                 },
                 user_info:{
                     patientname: '',
@@ -169,7 +131,7 @@ import Datepicker from 'vuejs-datepicker'
 
         methods:{
             addProduct(){
-                if(this.isNew){
+                /* if(this.isNew){
                     axios.post('/api/products-add',this.form)
                     .then(res => {
                         this.$router.push({name: 'product_list'});
@@ -179,7 +141,7 @@ import Datepicker from 'vuejs-datepicker'
                         });
                     })
                     .catch(error => this.errors = error.response.data.errors)
-                }else{
+                    }else{
                     axios.post('/api/products-update',{
                         data: this.form,
                         id: this.getId
@@ -191,18 +153,28 @@ import Datepicker from 'vuejs-datepicker'
                         });
                     })
                     .catch(error => this.errors = error.response.data.errors)
-                }
+                    }
+                */
+                axios.post('/api/products-update',{
+                    data: this.form,
+                    id: this.getId
+                })
+                .then(res => {
+                    Toast.fire({
+                        icon: 'success',
+                        title: 'Saved successfully'
+                    });
+                })
+                .catch(error => this.errors = error.response.data.errors)
             },      
             editForm(){                
                 let id = this.$route.params.id
                 axios.get('/api/products-detail/'+id)
                     .then(({ data }) => (
-                        this.form.name = data.product,  
-                        this.form.desc =  data.description,             
-                        //this.form.qty =  data.quantity,             
-                        this.form.uom =  data.uom,             
-                        //this.form.dop =  data.dop,             
-                        this.form.code =  data.code,             
+                        this.form.bbid = data.bizboxid,  
+                        this.form.desc =  data.description,            
+                        this.form.life =  data.life,               
+                        this.form.isPreventive =  data.isforpreventive,             
                         this.form.price =  data.price                                              
                 ))
                 .catch(error => this.errors = console.log(error.response.data.errors))

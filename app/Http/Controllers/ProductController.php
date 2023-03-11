@@ -8,6 +8,9 @@ use App\Model\Products;
 use App\Model\ReceivedProducts;
 use App\Model\Transaction_details;
 use DB;
+use App\Events\NewDataEvent;
+use App\Events\RegisterEvent;
+use App\Events\LikeEvent;
 
 class ProductController extends Controller
 {
@@ -18,8 +21,8 @@ class ProductController extends Controller
         $start = $request->start?$request->start:0;
         $val = $request->searchTerm2;
         if($val!=''||$start>0){   
-            $data =  DB::connection('pgsql')->select("select * from equipments where description ilike '%".$val."%' LIMIT $length offset $start");
-            $count =  DB::connection('pgsql')->select("select * from equipments where description ilike '%".$val."%' ");
+            $data =  DB::connection('pgsql')->select("select * from equipments where description ilike '%".$val."%' or bizboxid ilike '%".$val."%' LIMIT $length offset $start");
+            $count =  DB::connection('pgsql')->select("select * from equipments where description ilike '%".$val."%' or bizboxid ilike '%".$val."%'");
         }else{
             $data =  DB::connection('pgsql')->select("select * from equipments LIMIT $length");
             $count =  DB::connection('pgsql')->select("select * from equipments");
@@ -32,12 +35,8 @@ class ProductController extends Controller
         foreach ($data as $key => $value) {
             $arr = array();
             $arr['id'] =  $value->id;
-            $arr['name'] =  $value->description;
             $arr['desc'] =  $value->description;
-            $arr['qty'] =  $value->description;
-            $arr['uom'] =  $value->description;
-            $arr['dop'] =  $value->description;  
-            $arr['price'] =  $value->description;  
+            $arr['bizboxid'] =  $value->bizboxid; 
             $data_array[] = $arr;
         }
         $page = sizeof($count)/$length;
@@ -53,18 +52,24 @@ class ProductController extends Controller
     }   
 
     public function store(Request $request)
-    {
+    {        
+        $check = Products::where(['bizboxid'=>$request->bizboxid])->first();
         date_default_timezone_set('Asia/Manila');
-        $p = new Products;
-        $p->description = $request->desc;
-        $p->life = $request->life;
-        $p->bizboxID = $request->bizboxid;
-        $p->status = $request->status;
-        $p->isforpreventive = $request->ispreventive;  
-        $p->created_by = $request->userid;
-        $p->created_dt = date("Y-m-d H:i"); 
-        $p->save();
-        return true;
+        if($check==null){
+            $p = new Products;
+            $p->description = $request->desc;
+            $p->life = $request->life;
+            $p->bizboxid = $request->bizboxid;
+            $p->status = $request->status;
+            $p->isforpreventive = $request->ispreventive;  
+            $p->created_by = $request->userid;
+            $p->created_dt = date("Y-m-d H:i"); 
+            $p->save();
+            broadcast(new RegisterEvent($request->desc,$request->bizboxid));//->toOthers();
+            return true;
+        }else{
+            return response()->json('Duplicate Equipment');
+        }
     }
 
     public function edit($id)
@@ -76,15 +81,11 @@ class ProductController extends Controller
     public function update(Request $request)
     {
         Products::where(['id'=>$request->id])->update([
-            'product'=> $request->data['name'],
+            'isforpreventive'=> $request->data['isPreventive'],
             'description'=> $request->data['desc'],
-            //'quantity'=> $request->data['qty'],
-            'uom'=>  $request->data['uom'],
-            //'dop'=> $request->data['dop'],
-            'code'=> $request->data['code'],
-            'updated_by'=> $request->data['userid'],
+            'life'=>  $request->data['life'],
+            'updated_by'=> auth()->id(),
             'updated_dt'=>   date("Y-m-d H:i"),
-            'price'=>  $request->data['price'],
         ]);
         return response()->json(true);
     }

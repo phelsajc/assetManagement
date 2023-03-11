@@ -65,7 +65,7 @@
               
           </li>
 
-            <li class="nav-item" :class="{'menu-open':this.$route.name=='collection_add'||this.$route.name=='collection_list'||this.$route.name=='collection_reports'}">
+            <!-- <li class="nav-item" :class="{'menu-open':this.$route.name=='collection_add'||this.$route.name=='collection_list'||this.$route.name=='collection_reports'}">
               <a href="javascript:void(0);" class="nav-link" :class="{'active':this.$route.name=='collection_list'||this.$route.name=='collection_reports'}">
                 <i class="nav-icon fas fa-random"></i>
                 <p>
@@ -141,7 +141,7 @@
                 </ul>
               </li>
               </ul>
-            </li>
+            </li> -->
   
             <li class="nav-item">
               <a href="javascript:void(0);" class="nav-link" id="usermenu" :class="{'active':this.$route.name=='userslist'||this.$route.name=='usersadd'}">
@@ -154,14 +154,14 @@
             
             
             
-            <li class="nav-item">
+            <!-- <li class="nav-item">
               <a href="javascript:void(0);" class="nav-link" id="usermenu" :class="{'active':this.$route.name=='stocks'}">
                 <i class="far fa-circle nav-icon"></i>
                 <router-link to="/stocks" class="collapse-item"
                   >Stocks</router-link
                 >
               </a>
-            </li>
+            </li> -->
   
             <li class="nav-item">
               <router-link to="/logout" class="nav-link">

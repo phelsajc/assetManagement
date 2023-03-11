@@ -16,3 +16,19 @@ use Illuminate\Support\Facades\Broadcast;
 Broadcast::channel('App.User.{id}', function ($user, $id) {
     return (int) $user->id === (int) $id;
 });
+
+/* Broadcast::channel('/test', function () {
+    return true;
+}); */
+
+Broadcast::channel('likeChannel', function () {
+    return true; //Always return true or false
+});
+
+Broadcast::channel('popupChannel', function () {
+    return true; //Always return true or false
+});
+
+Broadcast::channel('registerChannel', function () {
+    return true; //Always return true or false
+});

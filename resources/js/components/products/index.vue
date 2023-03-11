@@ -49,7 +49,7 @@
                               <strong>{{e.desc}} </strong>
                             </h5>
                           </div>
-                          <span class="badge badge-secondary"> {{e.desc}}</span>
+                          <span class="badge badge-secondary"> {{e.bizboxid}}</span>
                         </div>
                       </div>
                     </li>
@@ -96,11 +96,11 @@
   </div>
 </template>
 
-<script type="text/javascript">
 
+<script>
   export default {
 created() {
-  
+ 
           if(!User.loggedIn()){
               this.$router.push({name: '/'})
           }
@@ -112,7 +112,8 @@ created() {
       data(){
 
           return {
-                showModal: false,
+            messages: [],
+              showModal: false,
               hasError: false,
               isHidden: true,
               form: {
@@ -134,18 +135,25 @@ created() {
                 return e.desc.match(this.searchTerm)
               })
           },
-
+      },
+      mounted(){
+        Echo.channel('registerChannel')
+        .listen('RegisterEvent', (e) => {
+          this.allEmployee()
+           /* if(this.content.id == e.id){
+                 e.type== 1? this.count ++ : this.count --
+           } */
+        });
       },
       methods: {
           allEmployee(){
             this.isHidden =  false
-              //axios.get('/api/employee')
               axios.get('/api/products')
               .then(({data}) => (
                 this.employees = data[0].data ,
                 this.countRecords =data[0].count,
                 this.showing = data[0].showing,
-            this.isHidden =  true
+                this.isHidden =  true
              ))
               .catch()
           },
@@ -172,14 +180,6 @@ created() {
             .catch(error => this.errors = error.response.data.errors)
 
           },
-          pdf(){
-              /* axios.get('/pdf')
-              .then(({data}) => (
-                  console.log(data)
-              ))
-              .catch() */
-              window.open("/api/pdf", '_blank');
-          },
         async  check_doctors_detail(id) {
           return await axios.get( '/api/check_doctors_detail/'+id)
             .then(response => {
@@ -188,13 +188,7 @@ created() {
               }, 3000);
 
             })
-           /*  .then((response) => {
-              return  Promise.resolve(response.data); }) */
-
           },
-        /* async  check_doctors_detail(id) {
-           return await axios.get( '/api/check_doctors_detail/'+id)
-          }, */
           formatDate(date) {
               const options = { year: 'numeric', month: 'long', day: 'numeric' }
               return new Date(date).toLocaleDateString('en', options)
@@ -217,10 +211,8 @@ created() {
                           })
                       })
                       .catch(() =>{
-                          //this.$router.push({name: 'all_employee'})
                           this.$router.push("/all_employee").catch(()=>{});
                       })
-
                       Swal.fire(
                       'Deleted!',
                       'Your file has been deleted.',
@@ -234,7 +226,6 @@ created() {
               this.countRecords = null
             this.form.start = 0
             this.isHidden =  false
-              //axios.post('/api/filterEmployee',this.form)
               axios.post('/api/products',this.form)
 
               .then(res => {
@@ -248,10 +239,6 @@ created() {
           getPageNo(id){
             this.form.start = (id-1) * 10
             this.isHidden =  false
-            //alert(a)
-            /* this.employees = []
-            this.countRecords = null */
-            //axios.post('/api/filterEmployee',this.form)
             console.log(this.isHidden)
             axios.post('/api/products',this.form)
               .then(res => {
@@ -265,13 +252,6 @@ created() {
             .catch(error => this.errors = error.response.data.errors)
           },
       },
-      /* mounted () {
-        axios.get('/api/check_doctors_detail/'+id)
-            .then(response => (this.getdctr = response))
-      }, */
-      /* created(){
-          this.allEmployee();
-      } */
   }
 </script>
 

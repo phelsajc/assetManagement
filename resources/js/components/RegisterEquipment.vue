@@ -8,8 +8,14 @@
             <div class="card-header">
               <h3 class="card-title">&nbsp;</h3>
             </div>
+            
             <form class="user" @submit.prevent="addProduct" enctype="multipart/form-data">
               <div class="card-body">
+                <div class="alert alert-danger alert-dismissible" v-if="isDuplicate">
+                  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                  <h5><i class="icon fas fa-ban"></i> Alert!</h5>
+                  Duplicate equipment!
+                </div>
                 <div class="form-group">
                   <label for="exampleInputEmail1">Bizbox ID </label>
                   <input type="text" class="form-control" readonly  placeholder="Enter Desctiption" v-model="form.bizboxid">
@@ -18,10 +24,10 @@
                   <label for="exampleInputEmail1">Description</label>
                   <input type="text" class="form-control" readonly placeholder="Enter Desctiption" v-model="form.desc">
                 </div>
-                <div class="form-group">
+                <!-- <div class="form-group">
                   <label for="exampleInputEmail1">Test</label>
                   <input type="text" class="form-control" readonly placeholder="Enter Desctiption" v-model="form.testval">
-                </div>
+                </div> -->
                 <div class="form-group">
                   <label for="exampleInputPassword1">Life</label>
                   <input type="text" class="form-control" placeholder="Enter Life" v-model="form.life">
@@ -63,6 +69,7 @@
                   ispreventive: false,
                   testval: '',
               },
+              isDuplicate: false,
           }
       },
       watch: {
@@ -71,10 +78,9 @@
         },
         description(v) {
           this.form.desc = v
-        }
+        },
       },
       computed: {
-          //...mapState(['bizboxid'])
       },
       methods: {
           autoComplete(){
@@ -87,12 +93,6 @@
           },
           getEquipment(id) {
               this.getValue = id            
-              /* this.results2.pk_iwitems = id.pk_iwitems;
-              this.results2.itemdesc = id.itemdesc;
-              this.results2.genericname = id.genericname;
-              this.results2.dc_price = id.discounted_price;
-              this.results2.sc_price = id.sc_price;
-              this.results2.reg_price = id.price; */
               this.form.val = id.desc;
               this.results = []
               this.$emit( 'handle-form-data', this.results2 );
@@ -105,7 +105,12 @@
           },addProduct(){            
             axios.post('/api/products-add',this.form)
               .then(res => {
-              //this.$router.push({name: 'product_list'});
+                if(res.data=="Duplicate Equipment"){
+                  this.isDuplicate = true
+                }else{
+                  this.isDuplicate = false
+                }
+                this.form = []
               Toast.fire({
                   icon: 'success',
                   title: 'Saved successfully'
@@ -115,7 +120,6 @@
           }   
       },     
       created() {
-          console.log(this.bizboxid)
           this.$parent.$on('update', this.setValue);
       },
   }

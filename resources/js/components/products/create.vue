@@ -71,6 +71,14 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <div class="form-check">
+                                        <input type="checkbox" class="form-check-input" :checked="form.active" v-model="form.active">
+                                        <label class="form-check-label" for="exampleCheck1">Active</label>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>                     
 
                             <div class="form-group">
@@ -116,6 +124,7 @@ import Datepicker from 'vuejs-datepicker'
                     desc: '',
                     life: '',
                     isPreventive: false,
+                    active:false,
                     id:0,
                 },
                 user_info:{
@@ -174,7 +183,8 @@ import Datepicker from 'vuejs-datepicker'
                         this.form.bbid = data.bizboxid,  
                         this.form.desc =  data.description,            
                         this.form.life =  data.life,               
-                        this.form.isPreventive =  data.isforpreventive,             
+                        this.form.isPreventive =  data.isforpreventive,  
+                        this.form.active =  data.status,            
                         this.form.price =  data.price                                              
                 ))
                 .catch(error => this.errors = console.log(error.response.data.errors))

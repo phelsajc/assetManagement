@@ -53,10 +53,7 @@ Route::match(['get','post'],'show_frequency/{id}','PrescriptionController@show_f
  * St.Marina
  */
 
-#Products
-Route::match(['get','post'],'products-add','ProductController@store');
-Route::match(['get','post'],'products-update','ProductController@update');
-Route::match(['get','post'],'products','ProductController@index');
+#EquipmentController
 Route::match(['get','post'],'products-detail/{id}','ProductController@edit');
 Route::match(['get','post'],'products-delete/{id}','ProductController@delete');
 Route::match(['get','post'],'searchProduct','ProductController@searchProduct');
@@ -101,6 +98,9 @@ Route::match(['get','post'],'collection-report','CollectionController@reports');
 
 #Equipment
 Route::match(['get','post'],'find_item','EquipmentController@find_item');
+Route::match(['get','post'],'products-add','EquipmentController@store');
+Route::match(['get','post'],'products-update','EquipmentController@update');
+Route::match(['get','post'],'products','EquipmentController@index');
 
 
 

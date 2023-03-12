@@ -40,8 +40,8 @@
               <li class="nav-item">
                 <a href="javascript:void(0);" class="nav-link" :class="{'active':this.$route.name=='rproduct_list'||this.$route.name=='rproduct_add'}">
                   <i class="far fa-circle nav-icon"></i>
-                  <router-link to="/rproduct_list" 
-                      >Received</router-link
+                  <router-link to="/department" 
+                      >Department</router-link
                     >
                 </a>
               </li>
@@ -65,84 +65,7 @@
               
           </li>
 
-            <!-- <li class="nav-item" :class="{'menu-open':this.$route.name=='collection_add'||this.$route.name=='collection_list'||this.$route.name=='collection_reports'}">
-              <a href="javascript:void(0);" class="nav-link" :class="{'active':this.$route.name=='collection_list'||this.$route.name=='collection_reports'}">
-                <i class="nav-icon fas fa-random"></i>
-                <p>
-                  Collections
-                </p>
-              </a>
-              <ul class="nav nav-treeview">
-                <li class="nav-item">
-                  <a href="javascript:void(0);" class="nav-link" :class="{'active':this.$route.name=='collection_list'||this.$route.name=='collection_add'}">
-                    <i class="far fa-circle nav-icon"></i>
-                    <router-link to="/collection_list" class="collapse-item"
-                      >List</router-link
-                    >
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="javascript:void(0);" class="nav-link" :class="{'active':this.$route.name=='collection_reports'}">
-                    <i class="far fa-circle nav-icon"></i>
-                    <router-link to="/collection_reports" class="collapse-item"
-                      >Reports</router-link
-                    >
-                  </a>
-                </li>
-              </ul>
-            </li>
-
             
-            <li class="nav-item" :class="{'menu-open':this.$route.name=='transaction'||this.$route.name=='transaction_list'||this.$route.name=='reports'||this.$route.name=='yearly_report'||this.$route.name=='transaction_report'}">
-              <a href="javascript:void(0);" class="nav-link" :class="{'active':this.$route.name=='transaction_list'||this.$route.name=='reports'||this.$route.name=='transaction_report'}">
-                <i class="nav-icon fas fa-file-invoice"></i>
-                <p>
-                  Invoice
-                  <i class="right fas fa-angle-left"></i>
-                </p>
-              </a>
-              <ul class="nav nav-treeview">
-                <li class="nav-item">
-              <a href="javascript:void(0);" class="nav-link" id="usermenu" :class="{'active':this.$route.name=='transaction_list'||this.$route.name=='transaction'}">
-                <i class="far fa-circle nav-icon"></i>
-                <router-link to="/transaction_list" class="collapse-item"
-                  >Transactions</router-link
-                >
-              </a>
-            </li>  
-
-            <li class="nav-item" :class="{'menu-open':this.$route.name=='reports'||this.$route.name=='yearly_report'||this.$route.name=='transaction_report'}">
-                <a href="javascript:void(0);" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>
-                   Reports
-                    <i class="right fas fa-angle-left"></i>
-                  </p>
-                </a>
-                <ul class="nav nav-treeview">
-                  <li class="nav-item">
-                    <a href="javascript:void(0);" class="nav-link">
-                      <i class="far fa-circle nav-icon"  :class="{'fa-dot-circle':this.$route.name=='transaction_report'}"></i>     
-                      <router-link to="/transaction_report" class="">Daily</router-link>
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="javascript:void(0);" class="nav-link">
-                      <i class="far fa-circle nav-icon"  :class="{'fa-dot-circle':this.$route.name=='reports'}"></i>     
-                      <router-link to="/reports" class="">Monthly</router-link>
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="javascript:void(0);" class="nav-link">
-                      <i class="far fa-circle nav-icon"  :class="{'fa-dot-circle':this.$route.name=='yearly_report'}"></i>     
-                      <router-link to="/yearly_report" class="">Yearly</router-link>
-                    </a>
-                  </li>
-                </ul>
-              </li>
-              </ul>
-            </li> -->
-  
             <li class="nav-item">
               <a href="javascript:void(0);" class="nav-link" id="usermenu" :class="{'active':this.$route.name=='userslist'||this.$route.name=='usersadd'}">
                 <i class="far fa-circle nav-icon"></i>
@@ -151,17 +74,6 @@
                 >
               </a>
             </li>
-            
-            
-            
-            <!-- <li class="nav-item">
-              <a href="javascript:void(0);" class="nav-link" id="usermenu" :class="{'active':this.$route.name=='stocks'}">
-                <i class="far fa-circle nav-icon"></i>
-                <router-link to="/stocks" class="collapse-item"
-                  >Stocks</router-link
-                >
-              </a>
-            </li> -->
   
             <li class="nav-item">
               <router-link to="/logout" class="nav-link">

@@ -14,22 +14,22 @@
     export default
     {
         data(){
-        return {
-            form: {
-                val: this.meds ,
-            },
-            results: [],
-            results3: [],
-            results2: {
-                id: '',
-                product: '',
-                description: '',
-                price: 0,
-                qty: 0,
-                code: 0,         
-            },
-            /* grand_total: 0, */
-        }
+            return {
+                form: {
+                    val: this.meds ,
+                },
+                results: [],
+                results3: [],
+                results2: {
+                    id: '',
+                    product: '',
+                    description: '',
+                    price: 0,
+                    qty: 0,
+                    code: 0,         
+                },
+                /* grand_total: 0, */
+            }
         },
         props: ['products'],
         methods: {

@@ -60,7 +60,7 @@ class ProductController extends Controller
             $p->description = $request->desc;
             $p->life = $request->life;
             $p->bizboxid = $request->bizboxid;
-            $p->status = $request->status;
+            $p->status = $request->status?1:0;
             $p->isforpreventive = $request->ispreventive;  
             $p->created_by = $request->userid;
             $p->created_dt = date("Y-m-d H:i"); 
@@ -82,6 +82,7 @@ class ProductController extends Controller
     {
         Products::where(['id'=>$request->id])->update([
             'isforpreventive'=> $request->data['isPreventive'],
+            'status'=> $request->data['active'],
             'description'=> $request->data['desc'],
             'life'=>  $request->data['life'],
             'updated_by'=> auth()->id(),

@@ -36,6 +36,10 @@
                   <input type="checkbox" class="form-check-input" v-model="form.ispreventive">
                   <label class="form-check-label" for="exampleCheck1">Is preventive?</label>
                 </div>
+                <div class="form-check">
+                  <input type="checkbox" class="form-check-input" v-model="form.status">
+                  <label class="form-check-label" for="exampleCheck1">Active</label>
+                </div>
               </div>
               <div class="card-footer">
                 <button type="submit" class="btn btn-primary">Submit</button>
@@ -58,27 +62,33 @@
           description: {
               type: String,
               default: ''
-          }
+          },
+          fval: {
+              type: String,
+              default: ''
+          },
       },
       data(){
           return {
               form: {
-                  bizboxid: self.bizboxid,                    
-                  desc: self.description,             
+                  bizboxid: this.bizboxid,                    
+                  desc: this.description,             
                   life: '',             
                   ispreventive: false,
-                  testval: '',
+                  //testval: '',
+                  status: false,
               },
               isDuplicate: false,
+              localMessage: this.fval
           }
-      },
+      }, 
       watch: {
         bizboxid(v) {
           this.form.bizboxid = v
         },
         description(v) {
           this.form.desc = v
-        },
+        },        
       },
       computed: {
       },
@@ -95,22 +105,28 @@
               this.getValue = id            
               this.form.val = id.desc;
               this.results = []
-              this.$emit( 'handle-form-data', this.results2 );
+           //  this.$emit( 'handle-form-data', this.results2 );
           },
           setValue(value) {
-          this.form.val = value
+          this.form.desc = value
           },
           clearForm() {
               this.form.val = ''
-          },addProduct(){            
+          },
+          addProduct(){            
             axios.post('/api/products-add',this.form)
               .then(res => {
                 if(res.data=="Duplicate Equipment"){
                   this.isDuplicate = true
                 }else{
                   this.isDuplicate = false
+                  this.form.desc = ''
+                  this.form.bizboxid = ''
+                  this.form.life = ''
+                  this.form.ispreventive = false
+                  this.form.status = false
+      this.$emit("update-message", this.localMessage);
                 }
-                this.form = []
               Toast.fire({
                   icon: 'success',
                   title: 'Saved successfully'

@@ -16,7 +16,6 @@
             <div class="modal-footer">
               <slot name="footer">
                 <button class="btn btn-danger" @click="$emit('close')">
-                <!-- <button class="btn btn-danger" @click="clsoeModal()"> -->
                   Close
                 </button>
               </slot>

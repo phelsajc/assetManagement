@@ -16,7 +16,7 @@
         </ul>
         </div>
         <div>
-            <RegisterEquipment :bizboxid="bbid" :description="bbdesc"  ref="regRef"></RegisterEquipment>
+            <RegisterEquipment :bizboxid="bbid" :fval="form.val" :description="bbdesc" ref="regRef" @update-message="updateParentMessage"></RegisterEquipment>
         </div>
     </div>
    </template>
@@ -51,25 +51,27 @@
                 .catch(error => this.errors = error.response.data.errors)        
             },
             getEquipment(id) {
-                this.getValue = id            
-                this.results = [] ;
+                this.getValue = id     
                 this.form.val = id.desc;
                 this.bbid = id.bizboxid;
                 this.bbdesc = id.desc;
-                this.$refs.regRef.form.testval = id.desc
-                this.$emit( 'handle-form-data', this.results2 );
-                
+                //this.$refs.regRef.form.testval = id.desc
+                this.$emit( 'handle-form-data', this.results2 );         
+                this.results = [] ;           
             },
             setValue(value) {
                 this.form.val = value
             },
             clearForm() {
-                this.form.val = ''
+                this.form.val = '';
             },     
             register(){
                 //this.isRegistered = true;
                 this.results = [] ;
-            }
+            },
+    updateParentMessage: function (newMessage) {
+      this.form.val = newMessage;
+    }
         },    
         props: ['products'],
     }

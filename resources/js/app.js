@@ -44,11 +44,18 @@ window.VuePdfApp = VuePdfApp;
 Vue.component('equipmentModal', require('./components/modals/equipment.vue').default);
 Vue.component('equipmentComponent', require('./components/Equipment.vue').default);
 Vue.component('RegisterEquipment', require('./components/RegisterEquipment.vue').default);
+
+Vue.component('departmentModal', require('./components/modals/department.vue').default);
+Vue.component('departmentComponent', require('./components/Department.vue').default);
+Vue.component('RegisterDepartment', require('./components/RegisterDepartment.vue').default);
+
 Vue.component('user-info', require('./components/User.vue').default);
+
 Vue.component('navComponent', require('./components/template/nav.vue').default);
 Vue.component('sidemenuComponent', require('./components/template/sidemenu.vue').default);
 Vue.component('footerComponent', require('./components/template/footer.vue').default);
 Vue.component('loaderComponent', require('./components/template/loader.vue').default);
+
 Vue.component('products', require('./components/Products.vue').default);
 
 const Toast = Swal.mixin({

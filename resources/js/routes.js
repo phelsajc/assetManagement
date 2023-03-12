@@ -16,8 +16,9 @@ let usersadd = require('./components/users/create.vue').default
 let product_list = require('./components/products/index.vue').default
 let product_add = require('./components/products/create.vue').default
 //Company
-/* let company_list = require('./components/company/index.vue').default
-let company_add = require('./components/company/create.vue').default */
+let Department_list = require('./components/department/index.vue').default
+let Department_add = require('./components/department/create.vue').default
+
 //Collections
 let collection_list = require('./components/collections/index.vue').default
 let collection_add = require('./components/collections/create.vue').default
@@ -56,8 +57,8 @@ export const routes = [
     { path: '/product_add/:id', component: product_add, name: 'product_add' },
 
     //Company
-/*     { path: '/company_list', component: company_list, name: 'company_list' },
-    { path: '/company_add/:id', component: company_add, name: 'company_add' }, */
+    { path: '/Department_list', component: Department_list, name: 'Department_list' },
+    { path: '/Department_add/:id', component: Department_add, name: 'Department_add' },
     
     //Transaction
     { path: '/transaction/:id', component: transaction, name: 'transaction' },

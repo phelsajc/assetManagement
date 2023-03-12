@@ -23,7 +23,10 @@ class EventServiceProvider extends ServiceProvider
          ],
          'App\Events\RegisterEvent' => [
             'App\Listerners\RegisterEventListener',
-          ],
+        ],
+        'App\Events\DepartmentEvent' => [
+            'App\Listerners\DepartmentEventListener',
+        ],
         //'App\Events\NewDataEvent',
     ];
 

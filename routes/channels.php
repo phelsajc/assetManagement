@@ -32,3 +32,7 @@ Broadcast::channel('popupChannel', function () {
 Broadcast::channel('registerChannel', function () {
     return true; //Always return true or false
 });
+
+Broadcast::channel('deptChannel', function () {
+    return true; //Always return true or false
+});

@@ -60,14 +60,6 @@ Route::match(['get','post'],'searchProduct','ProductController@searchProduct');
 Route::match(['get','post'],'getProducts','ProductController@getProducts');
 Route::match(['get','post'],'stockInventory','ProductController@stockInventory');
 
-#Company
-Route::match(['get','post'],'company-add','CompanyController@store');
-Route::match(['get','post'],'company-update','CompanyController@update');
-Route::match(['get','post'],'company','CompanyController@index');
-Route::match(['get','post'],'company-detail/{id}','CompanyController@edit');
-Route::match(['get','post'],'company-delete/{id}','CompanyController@delete');
-Route::match(['get','post'],'getCompanies','CompanyController@getCompanies');
-
 #Transaction
 Route::match(['get','post'],'saveTransaction','TransactionController@store');
 Route::match(['get','post'],'updateTransaction','TransactionController@update');
@@ -101,6 +93,13 @@ Route::match(['get','post'],'find_item','EquipmentController@find_item');
 Route::match(['get','post'],'products-add','EquipmentController@store');
 Route::match(['get','post'],'products-update','EquipmentController@update');
 Route::match(['get','post'],'products','EquipmentController@index');
+
+#Department
+Route::match(['get','post'],'find_dept','DepartmentsController@find_dept');
+Route::match(['get','post'],'dept-add','DepartmentsController@store');
+Route::match(['get','post'],'dept-update','DepartmentsController@update');
+Route::match(['get','post'],'dept','DepartmentsController@index');
+
 
 
 

@@ -40,7 +40,7 @@
               <li class="nav-item">
                 <a href="javascript:void(0);" class="nav-link" :class="{'active':this.$route.name=='rproduct_list'||this.$route.name=='rproduct_add'}">
                   <i class="far fa-circle nav-icon"></i>
-                  <router-link to="/department" 
+                  <router-link to="/Department_list" 
                       >Department</router-link
                     >
                 </a>

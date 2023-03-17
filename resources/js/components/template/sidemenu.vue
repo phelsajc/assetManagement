@@ -29,50 +29,72 @@
             role="menu"
             data-accordion="false"
           >
-          <li class="nav-item" :class="{'menu-open':this.$route.name=='company_add'||this.$route.name=='product_add'||this.$route.name=='rproduct_add'||this.$route.name=='rproduct_list'||this.$route.name=='company_list'||this.$route.name=='product_list'}">        
-            <a href="javascript:void(0);" class="nav-link" :class="{'active':this.$route.name=='rproduct_list'||this.$route.name=='company_list'||this.$route.name=='product_list'}">
+          <li class="nav-item" :class="{'menu-open':this.$route.name=='Department_list'||this.$route.name=='product_list'||this.$route.name=='Vendor_list'||this.$route.name=='product_add'||this.$route.name=='Department_add'||this.$route.name=='Vendor_add'}">        
+            <a href="javascript:void(0);" class="nav-link" :class="{'active':this.$route.name=='Department_list'||this.$route.name=='product_list'||this.$route.name=='Vendor_list'||this.$route.name=='product_add'||this.$route.name=='Department_add'||this.$route.name=='Vendor_add'}">
             <i class="nav-icon fas fa-folder-plus"></i>
               <p>
                 Master Files
               </p>
             </a>
             <ul class="nav nav-treeview">
+
               <li class="nav-item">
-                <a href="javascript:void(0);" class="nav-link" :class="{'active':this.$route.name=='rproduct_list'||this.$route.name=='rproduct_add'}">
-                  <i class="far fa-circle nav-icon"></i>
-                  <router-link to="/Department_list" 
-                      >Department</router-link
-                    >
-                </a>
+                  <a href="javascript:void(0);" class="nav-link" :class="{'active':this.$route.name=='Department_items'||this.$route.name=='Department_item_add'||this.$route.name=='Department_list'||this.$route.name=='Department_add'}">
+                    <i class="far fa-circle nav-icon"></i>
+                    Departments
+                  </a>
+                
+                <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                      <router-link to="/Department_list"> 
+                        <a href="javascript:void(0);" class="nav-link" :class="{'active':this.$route.name=='Department_list'||this.$route.name=='Department_add'}">
+                          <i class="far fa-circle nav-icon"></i>
+                          List
+                        </a>
+                      </router-link>
+                    </li>
+                    <li class="nav-item">                      
+                      <router-link to="/Department_list"> 
+                        <a href="javascript:void(0);" class="nav-link" :class="{'active':this.$route.name=='Department_item'||this.$route.name=='Department_item_add'}">
+                          <i class="far fa-circle nav-icon"></i>
+                          Items
+                        </a>
+                      </router-link>
+                    </li>
+                  </ul>
               </li>
+
+                <li class="nav-item">
+                  <router-link to="/product_list">
+                    <a href="javascript:void(0);" class="nav-link" :class="{'active':this.$route.name=='product_list'||this.$route.name=='product_add'}">
+                      <i class="far fa-circle nav-icon"></i>
+                      Equipments
+                    </a>
+                  </router-link>
+                </li>
+
+
               <li class="nav-item">
-                <a href="javascript:void(0);" class="nav-link" :class="{'active':this.$route.name=='product_list'||this.$route.name=='product_add'}">
+                <router-link to="/Vendor_list">
+                  <a href="javascript:void(0);" class="nav-link" :class="{'active':this.$route.name=='Vendor_list'||this.$route.name=='Vendor_add'}">
                   <i class="far fa-circle nav-icon"></i>
-                    <router-link to="/product_list" 
-                      >Products</router-link
-                    >
-                </a>
+                      Vendors
+                  </a>
+                </router-link>
               </li>
-              <li class="nav-item">
-                <a href="javascript:void(0);" class="nav-link" :class="{'active':this.$route.name=='company_list'||this.$route.name=='company_add'}">
-                  <i class="far fa-circle nav-icon"></i>
-                    <router-link to="/company_list" 
-                      >Company</router-link
-                    >
-                </a>
-              </li>
+
             </ul>
               
           </li>
 
             
             <li class="nav-item">
-              <a href="javascript:void(0);" class="nav-link" id="usermenu" :class="{'active':this.$route.name=='userslist'||this.$route.name=='usersadd'}">
-                <i class="far fa-circle nav-icon"></i>
-                <router-link to="/userslist" class="collapse-item"
-                  >Users</router-link
-                >
-              </a>
+              <router-link to="/userslist" class="collapse-item">
+                <a href="javascript:void(0);" class="nav-link" id="usermenu" :class="{'active':this.$route.name=='userslist'||this.$route.name=='usersadd'}">
+                  <i class="far fa-circle nav-icon"></i>
+                  Users
+                </a>
+              </router-link>
             </li>
   
             <li class="nav-item">

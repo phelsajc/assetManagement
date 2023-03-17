@@ -69,15 +69,20 @@ class DepartmentsController extends Controller
 
     public function store(Request $request)
     {
+        $check = Department::where(['bizboxid'=>$request->bizboxid])->first();
         date_default_timezone_set('Asia/Manila');
-        $p = new Department;
-        $p->department = $request->dept;
-        $p->location = $request->loc;
-        $p->status = $request->status; 
-        $p->bizboxid = $request->bizboxid; 
-        $p->save(); 
-        broadcast(new DepartmentEvent($request->dept,$request->bizboxid));//->toOthers();
-        return true;
+        if($check==null){
+            $p = new Department;
+            $p->department = $request->dept;
+            $p->location = $request->loc;
+            $p->status = $request->status; 
+            $p->bizboxid = $request->bizboxid; 
+            $p->save(); 
+            broadcast(new DepartmentEvent($request->dept,$request->bizboxid));//->toOthers();
+            return true;
+        }else{
+            return response()->json('Duplicate Department');
+        }
     }
 
     public function edit($id)
@@ -92,7 +97,6 @@ class DepartmentsController extends Controller
             'department'=> $request->data['dept'],
             'location'=> $request->data['loc'],
             'status'=> $request->data['status'],
-            'bizboxid'=> $request->data['bizboxid'],
         ]);
         return true;
     }

@@ -14,7 +14,7 @@
                 <div class="alert alert-danger alert-dismissible" v-if="isDuplicate">
                   <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                   <h5><i class="icon fas fa-ban"></i> Alert!</h5>
-                  Duplicate equipment!
+                  Duplicate department!
                 </div>
                 <div class="form-group">
                   <label for="exampleInputEmail1">Bizbox ID </label>
@@ -106,7 +106,7 @@
           addProduct(){            
             axios.post('/api/dept-add',this.form)
               .then(res => {
-                if(res.data=="Duplicate Equipment"){
+                if(res.data=="Duplicate Department"){
                   this.isDuplicate = true
                 }else{
                   this.isDuplicate = false

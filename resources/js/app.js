@@ -49,6 +49,10 @@ Vue.component('departmentModal', require('./components/modals/department.vue').d
 Vue.component('departmentComponent', require('./components/Department.vue').default);
 Vue.component('RegisterDepartment', require('./components/RegisterDepartment.vue').default);
 
+Vue.component('vendorModal', require('./components/modals/vendor.vue').default);
+Vue.component('vendorComponent', require('./components/Vendor.vue').default);
+Vue.component('RegisterVendor', require('./components/RegisterVendor.vue').default);
+
 Vue.component('user-info', require('./components/User.vue').default);
 
 Vue.component('navComponent', require('./components/template/nav.vue').default);

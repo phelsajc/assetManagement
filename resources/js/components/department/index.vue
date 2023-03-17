@@ -40,7 +40,7 @@
                       placeholder="Search user here"
                     />
                      
-                    <router-link v-for="e in filtersearch" :key="e.id" :to="{name: 'product_add',params:{id:e.id}}">    
+                    <router-link v-for="e in filtersearch" :key="e.id" :to="{name: 'Department_add',params:{id:e.id}}">    
                     <li class="list-group-item">
                       <div class="row">
                         <div class="col-6 float-left">
